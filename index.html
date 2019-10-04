@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        video {
+           background: #222;
+          margin: 0 0 20px 0;
+          --width: 100%;
+          width: var(--width);
+          height: calc(var(--width) * 0.75);
+        }
+    </style>
+</head>
+<body>
+  <video id="test" autoplay playsinline></video> 
+  <script>
+          var getUserMedia;
+          var browserUserMedia =	navigator.webkitGetUserMedia	||	// WebKit
+                      navigator.mozGetUserMedia	||	// Mozilla FireFox
+                      navigator.getUserMedia;			// 2013...
+          if ( !browserUserMedia ) throw 'Your browser doesn\'t support WebRTC';
+
+          getUserMedia = browserUserMedia.bind( navigator );
+
+          getUserMedia(
+            {
+              audio: true,
+              video: true
+            },
+            function( stream ) {
+              console.log( stream );
+            },
+            function( err ) {
+              console.log( err );
+            }
+          );
+          //document.getElementById("test").getUserMedia();
+
+          //newStream = new MediaStream(document.getElementById("test"));
+          //const stream = await navigator.mediaDevices.getUserMedia(getUserMedia);
+          var videoElement = document.getElementById('test');//document.querySelector('video');//document.getElementById('test'));
+          videoElement.src = URL.createObjectURL( stream );
+          //videoElement.srcObject = stream;
+  </script>
+</body>
+</html>
